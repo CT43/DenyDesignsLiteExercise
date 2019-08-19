@@ -1,0 +1,32 @@
+<%= link_to "Products", "/products" %>
+
+<%= form_for(@pva) do |f| %>
+  <% if @pva.errors.any? %>
+    <div id="error_explanation">
+      <h2>There were some errors:</h2>
+
+      <ul>
+        <% @pva.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+<% end %>
+
+<h2><%= "#{@product_name}"%> Vendor Allocation Percentages</h2>
+
+<% @vendors.each do |vendor|%>
+  <%= form_for @pva, remote: true do |f| %>
+    <%= hidden_field_tag :vendor_id, "#{vendor.id}" %>
+    <%= hidden_field_tag :product_id, "#{@product_id}" %>
+    <%= vendor.name %>
+    <% if vendor.product_vendor_allocations.where("product_id = #{@product_id}") != []  %>
+      <% @pvaa = vendor.product_vendor_allocations.where("product_id = #{@product_id}")  %>
+      <%= f.number_field :allocation_percentage, value: "#{@pvaa[0].allocation_percentage}", step: :any, min: 0, max:100 %>%
+    <% else %>
+      <%= f.number_field :allocation_percentage, value: nil, step: :any, min: 0, max:100 %>%
+      <% end %>
+    <%= f.submit "Confirm"%> <br>
+  <% end %>
+<% end %>

@@ -1,0 +1,11 @@
+<%= link_to "Products", "/products" %>
+<%= link_to "Add new vendor", "/vendors/new" %>
+
+
+<h1>Vendors</h1>
+
+<% @vendors.each do |vendor| %>
+<%= link_to vendor.name, edit_vendor_path(vendor) %> <br>
+<% end %>
+
+<br> <br>

@@ -1,0 +1,12 @@
+<%= form_for @order do |f| %>
+
+  <%= f.fields_for :order_items do |order_item| %>
+    <%= order_item.label :sku %>
+    <%= order_item.text_field :sku %><br>
+
+    <%= order_item.label :quantity %>
+    <%= order_item.text_field :quantity %><br>
+  <% end %>
+
+  <%= f.submit %>
+<% end %>

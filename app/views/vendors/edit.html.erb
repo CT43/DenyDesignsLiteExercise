@@ -1,0 +1,16 @@
+<%= link_to "Products", "/products" %>
+
+
+<h2><%= "#{@vendor.name}"%></h2>
+
+<%= form_for @vendor do |f| %>
+
+  <%= f.label :name, "name" %>
+  <%= f.text_field :name %> <br><br>
+
+<%= f.submit %>
+<% end %>
+<br>
+<%= form_for @vendor, method: :delete do |f| %>
+  <%= f.submit "Remove vendor" %><br/>
+<% end %>

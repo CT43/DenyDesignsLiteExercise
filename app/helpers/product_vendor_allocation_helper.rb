@@ -1,0 +1,2 @@
+module ProductVendorAllocationHelper
+end
